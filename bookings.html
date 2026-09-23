@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TripEase - Bookings</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            ✈️ <span>Trip<span class="blue-text">Ease</span></span>
+        </div>
+
+        <nav>
+
+            <a href="index.html" class="nav-link">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="explore.html" class="nav-link">
+                🌍 <span>Explore</span>
+            </a>
+
+            <a href="bookings.html" class="nav-link active">
+                ✈️ <span>Bookings</span>
+            </a>
+
+            <a href="my-trips.html" class="nav-link">
+                🧳 <span>My Trips</span>
+            </a>
+
+            <a href="budget.html" class="nav-link">
+                💰 <span>Travel Budget</span>
+            </a>
+
+            <a href="profile.html" class="nav-link">
+                👤 <span>Profile</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>Bookings ✈️</h2>
+
+                <p>
+                    Find flights and hotels for your trip.
+                </p>
+
+            </div>
+
+            <div class="user-mini">
+
+                <div class="avatar">A</div>
+
+                <div>
+
+                    <strong>Anil</strong>
+
+                    <small>Traveler</small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="page-header">
+
+            <h1>Book Your Travel</h1>
+
+            <p>
+                Search flights and hotels and add them to your trip.
+            </p>
+
+        </section>
+
+
+        <!-- BOOKING TABS -->
+
+        <div class="booking-tabs">
+
+            <button
+                class="booking-tab active"
+                onclick="showBookingType('flights', this)"
+            >
+                ✈️ Flights
+            </button>
+
+            <button
+                class="booking-tab"
+                onclick="showBookingType('hotels', this)"
+            >
+                🏨 Hotels
+            </button>
+
+            <button
+                class="booking-tab"
+                onclick="showBookingType('mybookings', this)"
+            >
+                🎫 My Bookings
+            </button>
+
+        </div>
+
+
+        <!-- FLIGHTS -->
+
+        <section id="flightsSection">
+
+            <div class="form-card">
+
+                <h2>Search Flights</h2>
+
+                <br>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>From</label>
+
+                        <input
+                            type="text"
+                            id="flightFrom"
+                            placeholder="Kochi"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>To</label>
+
+                        <input
+                            type="text"
+                            id="flightTo"
+                            placeholder="Delhi"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Departure Date</label>
+
+                        <input
+                            type="date"
+                            id="flightDate"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Travellers</label>
+
+                        <input
+                            type="number"
+                            id="flightTravellers"
+                            value="1"
+                            min="1"
+                        >
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <button
+                    class="primary-btn"
+                    onclick="searchFlights()"
+                >
+                    Search Flights
+                </button>
+
+            </div>
+
+
+            <h2>Recommended Flights</h2>
+
+            <div id="flightResults"></div>
+
+        </section>
+
+
+        <!-- HOTELS -->
+
+        <section
+            id="hotelsSection"
+            style="display:none"
+        >
+
+            <div class="form-card">
+
+                <h2>Search Hotels</h2>
+
+                <br>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Destination</label>
+
+                        <input
+                            type="text"
+                            id="hotelDestination"
+                            placeholder="Munnar"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Check-in</label>
+
+                        <input
+                            type="date"
+                            id="hotelCheckin"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Check-out</label>
+
+                        <input
+                            type="date"
+                            id="hotelCheckout"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Guests</label>
+
+                        <input
+                            type="number"
+                            id="hotelGuests"
+                            value="2"
+                            min="1"
+                        >
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <button
+                    class="primary-btn"
+                    onclick="searchHotels()"
+                >
+                    Search Hotels
+                </button>
+
+            </div>
+
+
+            <h2>Recommended Hotels</h2>
+
+            <div id="hotelResults"></div>
+
+        </section>
+
+
+        <!-- MY BOOKINGS -->
+
+        <section
+            id="myBookingsSection"
+            style="display:none"
+        >
+
+            <div id="bookingsList"></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="app.js"></script>
+
+
+<script>
+
+/* =========================================================
+   SAMPLE FLIGHTS
+========================================================= */
+
+const flights = [
+
+    {
+        airline: "IndiGo",
+        from: "Kochi",
+        to: "Delhi",
+        time: "08:30 AM",
+        duration: "3h 10m",
+        price: 4500
+    },
+
+    {
+        airline: "Air India",
+        from: "Kochi",
+        to: "Delhi",
+        time: "11:15 AM",
+        duration: "3h 20m",
+        price: 5200
+    },
+
+    {
+        airline: "Vistara",
+        from: "Kochi",
+        to: "Delhi",
+        time: "04:40 PM",
+        duration: "3h 15m",
+        price: 6100
+    },
+
+    {
+        airline: "IndiGo",
+        from: "Kochi",
+        to: "Mumbai",
+        time: "09:15 AM",
+        duration: "2h 10m",
+        price: 3800
+    }
+
+];
+
+
+/* =========================================================
+   SAMPLE HOTELS
+========================================================= */
+
+const hotels = [
+
+    {
+        name: "Green Valley Resort",
+        location: "Munnar",
+        rating: 4.6,
+        price: 2500,
+        type: "Standard"
+    },
+
+    {
+        name: "Grand Munnar Resort",
+        location: "Munnar",
+        rating: 4.8,
+        price: 3500,
+        type: "Luxury"
+    },
+
+    {
+        name: "Tea Garden Stay",
+        location: "Munnar",
+        rating: 4.4,
+        price: 1800,
+        type: "Budget"
+    },
+
+    {
+        name: "Beach View Resort",
+        location: "Goa",
+        rating: 4.7,
+        price: 4200,
+        type: "Luxury"
+    }
+
+];
+
+
+/* =========================================================
+   BOOKING TAB
+========================================================= */
+
+function showBookingType(type, button) {
+
+    document
+        .getElementById("flightsSection")
+        .style.display =
+        type === "flights"
+            ? "block"
+            : "none";
+
+
+    document
+        .getElementById("hotelsSection")
+        .style.display =
+        type === "hotels"
+            ? "block"
+            : "none";
+
+
+    document
+        .getElementById("myBookingsSection")
+        .style.display =
+        type === "mybookings"
+            ? "block"
+            : "none";
+
+
+    document
+        .querySelectorAll(".booking-tab")
+        .forEach(
+            tab => tab.classList.remove("active")
+        );
+
+
+    button.classList.add("active");
+
+
+    if (type === "mybookings") {
+
+        displayBookings();
+
+    }
+
+}
+
+
+/* =========================================================
+   SEARCH FLIGHTS
+========================================================= */
+
+function searchFlights() {
+
+    const from =
+        document
+        .getElementById("flightFrom")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const to =
+        document
+        .getElementById("flightTo")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const results =
+        flights.filter(flight => {
+
+            const matchesFrom =
+                !from ||
+                flight.from
+                    .toLowerCase()
+                    .includes(from);
+
+            const matchesTo =
+                !to ||
+                flight.to
+                    .toLowerCase()
+                    .includes(to);
+
+            return matchesFrom && matchesTo;
+
+        });
+
+
+    displayFlights(results);
+
+}
+
+
+/* =========================================================
+   DISPLAY FLIGHTS
+========================================================= */
+
+function displayFlights(results) {
+
+    const container =
+        document.getElementById(
+            "flightResults"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (results.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-card">
+
+                <h3>No flights found</h3>
+
+                <p>
+                    Try another route.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    results.forEach(flight => {
+
+        container.innerHTML += `
+
+            <div class="recommendation">
+
+                <div>
+
+                    <strong>
+                        ✈️ ${flight.airline}
+                    </strong>
+
+                    <p class="trip-info">
+                        ${flight.from}
+                        →
+                        ${flight.to}
+                    </p>
+
+                    <p class="trip-info">
+                        ${flight.time}
+                        •
+                        ${flight.duration}
+                    </p>
+
+                    <span class="recommended-label">
+                        RECOMMENDED
+                    </span>
+
+                </div>
+
+
+                <div style="text-align:right">
+
+                    <h3>
+                        ${formatCurrency(flight.price)}
+                    </h3>
+
+                    <br>
+
+                    <button
+                        class="primary-btn"
+                        onclick='bookFlight(${JSON.stringify(flight)})'
+                    >
+                        Book Flight
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   BOOK FLIGHT
+========================================================= */
+
+function bookFlight(flight) {
+
+    const booking = {
+
+        id: Date.now(),
+
+        type: "Flight",
+
+        name: flight.airline,
+
+        details:
+            `${flight.from} → ${flight.to}`,
+
+        date:
+            document
+            .getElementById("flightDate")
+            .value
+            ||
+            new Date()
+                .toISOString()
+                .split("T")[0],
+
+        price:
+            flight.price,
+
+        status: "Confirmed"
+
+    };
+
+
+    addBooking(booking);
+
+
+    addExpense(
+        "Flight",
+        flight.price,
+        `${flight.airline}: ${flight.from} to ${flight.to}`
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH HOTELS
+========================================================= */
+
+function searchHotels() {
+
+    const destination =
+        document
+        .getElementById(
+            "hotelDestination"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const results =
+        hotels.filter(
+            hotel =>
+                !destination ||
+                hotel.location
+                    .toLowerCase()
+                    .includes(destination)
+        );
+
+
+    displayHotels(results);
+
+}
+
+
+/* =========================================================
+   DISPLAY HOTELS
+========================================================= */
+
+function displayHotels(results) {
+
+    const container =
+        document.getElementById(
+            "hotelResults"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (results.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-card">
+
+                <h3>
+                    No hotels found
+                </h3>
+
+                <p>
+                    Try another destination.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    results.forEach(hotel => {
+
+        container.innerHTML += `
+
+            <div class="recommendation">
+
+                <div>
+
+                    <strong>
+                        🏨 ${hotel.name}
+                    </strong>
+
+                    <p class="trip-info">
+                        📍 ${hotel.location}
+                    </p>
+
+                    <p class="trip-info">
+                        ⭐ ${hotel.rating}
+                        • ${hotel.type}
+                    </p>
+
+                    <span class="recommended-label">
+                        GOOD MATCH
+                    </span>
+
+                </div>
+
+
+                <div style="text-align:right">
+
+                    <h3>
+                        ${formatCurrency(hotel.price)}
+                        <small>/night</small>
+                    </h3>
+
+                    <br>
+
+                    <button
+                        class="primary-btn"
+                        onclick='bookHotel(${JSON.stringify(hotel)})'
+                    >
+                        Book Hotel
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   BOOK HOTEL
+========================================================= */
+
+function bookHotel(hotel) {
+
+    const checkin =
+        document
+        .getElementById(
+            "hotelCheckin"
+        )
+        .value
+        ||
+        new Date()
+            .toISOString()
+            .split("T")[0];
+
+
+    const checkout =
+        document
+        .getElementById(
+            "hotelCheckout"
+        )
+        .value;
+
+
+    let nights = 1;
+
+
+    if (checkout) {
+
+        nights =
+            calculateNights(
+                checkin,
+                checkout
+            );
+
+        if (nights <= 0) {
+            nights = 1;
+        }
+
+    }
+
+
+    const total =
+        hotel.price * nights;
+
+
+    const booking = {
+
+        id: Date.now(),
+
+        type: "Hotel",
+
+        name: hotel.name,
+
+        details:
+            `${hotel.location} • ${nights} night(s)`,
+
+        date:
+            checkin,
+
+        price:
+            total,
+
+        status: "Confirmed"
+
+    };
+
+
+    addBooking(booking);
+
+
+    addExpense(
+        "Hotel",
+        total,
+        `${hotel.name} - ${nights} night(s)`
+    );
+
+}
+
+
+/* =========================================================
+   DISPLAY BOOKINGS
+========================================================= */
+
+function displayBookings() {
+
+    const container =
+        document.getElementById(
+            "bookingsList"
+        );
+
+
+    const bookings =
+        getData(
+            STORAGE_KEYS.bookings,
+            []
+        );
+
+
+    if (bookings.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-card">
+
+                <div class="empty-icon">
+                    🎫
+                </div>
+
+                <h3>
+                    No bookings yet
+                </h3>
+
+                <p>
+                    Your flight and hotel bookings will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Type</th>
+
+                        <th>Booking</th>
+
+                        <th>Details</th>
+
+                        <th>Date</th>
+
+                        <th>Amount</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    ${bookings.map(
+                        (booking, index) => `
+
+                        <tr>
+
+                            <td>
+                                ${booking.type}
+                            </td>
+
+                            <td>
+                                ${booking.name}
+                            </td>
+
+                            <td>
+                                ${booking.details}
+                            </td>
+
+                            <td>
+                                ${formatDate(booking.date)}
+                            </td>
+
+                            <td>
+                                ${formatCurrency(booking.price)}
+                            </td>
+
+                            <td>
+                                ✓ ${booking.status}
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="secondary-btn"
+                                    onclick="deleteBooking(${index})"
+                                >
+                                    Cancel
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `).join("")}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
