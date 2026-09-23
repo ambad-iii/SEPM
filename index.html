@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripEase - Travel Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            ✈️ <span>Trip<span class="blue-text">Ease</span></span>
+        </div>
+
+        <nav>
+
+            <a href="index.html" class="nav-link active">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="pages/explore.html" class="nav-link">
+                🌍 <span>Explore</span>
+            </a>
+
+            <a href="pages/bookings.html" class="nav-link">
+                ✈️ <span>Bookings</span>
+            </a>
+
+            <a href="pages/my-trips.html" class="nav-link">
+                🧳 <span>My Trips</span>
+            </a>
+
+            <a href="pages/budget.html" class="nav-link">
+                💰 <span>Travel Budget</span>
+            </a>
+
+            <a href="pages/profile.html" class="nav-link">
+                👤 <span>Profile</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h2>Good morning, Anil! 👋</h2>
+                <p>Ready for your next adventure?</p>
+            </div>
+
+            <div class="user-mini">
+                <div class="avatar">A</div>
+
+                <div>
+                    <strong>Anil</strong>
+                    <small>Traveler</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- WELCOME -->
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="hero-label">YOUR NEXT ADVENTURE</span>
+
+                <h1>Travel more.<br>Experience more.</h1>
+
+                <p>
+                    Plan your perfect trip, discover amazing destinations
+                    and manage your travel in one place.
+                </p>
+
+                <a href="pages/explore.html" class="primary-btn">
+                    Explore Destinations →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon blue">🧳</div>
+                <div>
+                    <span>Planned Trips</span>
+                    <h2 id="dashboardTrips">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">🎫</div>
+                <div>
+                    <span>Bookings</span>
+                    <h2 id="dashboardBookings">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">💰</div>
+                <div>
+                    <span>Travel Budget</span>
+                    <h2 id="dashboardBudget">₹0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple">🌍</div>
+                <div>
+                    <span>Places Saved</span>
+                    <h2 id="dashboardSaved">0</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+        <section class="section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Quick Actions</h2>
+                    <p>Everything you need for your next trip.</p>
+                </div>
+            </div>
+
+
+            <div class="quick-grid">
+
+                <a href="pages/explore.html" class="quick-card">
+                    <div class="quick-icon">🌍</div>
+                    <h3>Explore Places</h3>
+                    <p>Discover new destinations.</p>
+                </a>
+
+                <a href="pages/bookings.html" class="quick-card">
+                    <div class="quick-icon">✈️</div>
+                    <h3>Book Travel</h3>
+                    <p>Find flights and hotels.</p>
+                </a>
+
+                <a href="pages/my-trips.html" class="quick-card">
+                    <div class="quick-icon">🗺️</div>
+                    <h3>Plan a Trip</h3>
+                    <p>Create your itinerary.</p>
+                </a>
+
+                <a href="pages/budget.html" class="quick-card">
+                    <div class="quick-icon">💰</div>
+                    <h3>Manage Budget</h3>
+                    <p>Track your travel expenses.</p>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- UPCOMING TRIP -->
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Upcoming Trip</h2>
+                    <p>Your next adventure.</p>
+                </div>
+
+                <a href="pages/my-trips.html" class="text-link">
+                    View all →
+                </a>
+
+            </div>
+
+
+            <div id="upcomingTrip">
+
+                <div class="empty-card">
+                    <div class="empty-icon">🧳</div>
+                    <h3>No trips planned yet</h3>
+                    <p>Explore a destination and start planning your next trip.</p>
+
+                    <a href="pages/explore.html" class="secondary-btn">
+                        Start Planning
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="js/app.js"></script>
+
+</body>
+</html>

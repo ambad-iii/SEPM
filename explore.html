@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>TripEase - Explore</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            ✈️ <span>Trip<span class="blue-text">Ease</span></span>
+        </div>
+
+        <nav>
+
+            <a href="../index.html" class="nav-link">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="explore.html" class="nav-link active">
+                🌍 <span>Explore</span>
+            </a>
+
+            <a href="bookings.html" class="nav-link">
+                ✈️ <span>Bookings</span>
+            </a>
+
+            <a href="my-trips.html" class="nav-link">
+                🧳 <span>My Trips</span>
+            </a>
+
+            <a href="budget.html" class="nav-link">
+                💰 <span>Travel Budget</span>
+            </a>
+
+            <a href="profile.html" class="nav-link">
+                👤 <span>Profile</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>Explore the World 🌍</h2>
+
+                <p>
+                    Discover places and start planning your next adventure.
+                </p>
+
+            </div>
+
+            <div class="user-mini">
+
+                <div class="avatar">A</div>
+
+                <div>
+
+                    <strong>Anil</strong>
+
+                    <small>Traveler</small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="page-header">
+
+            <h1>Find Your Destination</h1>
+
+            <p>
+                Search for places, save your favorites,
+                or create a complete trip plan.
+            </p>
+
+        </section>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="destinationSearch"
+                placeholder="Search Munnar, Goa, Bali..."
+            >
+
+            <button
+                class="primary-btn"
+                onclick="searchDestinations()"
+            >
+                Search
+            </button>
+
+        </div>
+
+
+        <div
+            class="destination-grid"
+            id="destinationGrid"
+        ></div>
+
+    </main>
+
+</div>
+
+
+<!-- PLAN TRIP MODAL -->
+
+<div
+    class="modal"
+    id="planModal"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>🗺️ Plan Your Trip</h2>
+
+            <button
+                class="close-btn"
+                onclick="closePlanModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="planTripForm">
+
+            <input
+                type="hidden"
+                id="selectedDestination"
+            >
+
+            <input
+                type="hidden"
+                id="selectedLocation"
+            >
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Destination</label>
+
+                    <input
+                        type="text"
+                        id="destinationDisplay"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Travellers</label>
+
+                    <input
+                        type="number"
+                        id="travellers"
+                        value="2"
+                        min="1"
+                        max="20"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Start Date</label>
+
+                    <input
+                        type="date"
+                        id="startDate"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>End Date</label>
+
+                    <input
+                        type="date"
+                        id="endDate"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Trip Style</label>
+
+                    <select id="tripStyle">
+
+                        <option>Relaxed</option>
+
+                        <option selected>
+                            Balanced
+                        </option>
+
+                        <option>
+                            Adventure
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Trip Budget</label>
+
+                    <input
+                        type="number"
+                        id="tripBudget"
+                        placeholder="30000"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    margin-top:20px;
+                    padding:15px;
+                    background:#eff6ff;
+                    border-radius:10px;
+                "
+            >
+
+                <strong>Trip Duration</strong>
+
+                <p id="durationText">
+                    Select your dates
+                </p>
+
+            </div>
+
+
+            <div style="margin-top:20px">
+
+                <label>
+                    <strong>Interests</strong>
+                </label>
+
+                <div class="preference-list">
+
+                    <label class="preference">
+                        <input
+                            type="checkbox"
+                            value="Nature"
+                            class="interest"
+                        >
+                        Nature
+                    </label>
+
+                    <label class="preference">
+                        <input
+                            type="checkbox"
+                            value="Adventure"
+                            class="interest"
+                        >
+                        Adventure
+                    </label>
+
+                    <label class="preference">
+                        <input
+                            type="checkbox"
+                            value="Food"
+                            class="interest"
+                        >
+                        Food
+                    </label>
+
+                    <label class="preference">
+                        <input
+                            type="checkbox"
+                            value="Shopping"
+                            class="interest"
+                        >
+                        Shopping
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    margin-top:25px;
+                    display:flex;
+                    gap:10px;
+                    justify-content:flex-end;
+                "
+            >
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closePlanModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Create Trip
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="../js/app.js"></script>
+
+
+
+<script>
+
+/* =========================================================
+   DESTINATIONS
+========================================================= */
+
+const destinations = [
+
+    {
+        name: "Munnar",
+        location: "Kerala, India",
+        price: 8000,
+        image:
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Goa",
+        location: "Goa, India",
+        price: 12000,
+        image:
+        "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Manali",
+        location: "Himachal Pradesh, India",
+        price: 15000,
+        image:
+        "https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Bali",
+        location: "Indonesia",
+        price: 45000,
+        image:
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Dubai",
+        location: "UAE",
+        price: 50000,
+        image:
+        "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Paris",
+        location: "France",
+        price: 90000,
+        image:
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
+    }
+
+];
+
+
+/* =========================================================
+   DISPLAY DESTINATIONS
+========================================================= */
+
+function displayDestinations(list) {
+
+    const grid =
+        document.getElementById(
+            "destinationGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    if (list.length === 0) {
+
+        grid.innerHTML = `
+
+            <div class="empty-card">
+
+                <div class="empty-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    No destinations found
+                </h3>
+
+                <p>
+                    Try another destination.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.forEach(
+        destination => {
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "destination-card";
+
+
+            card.innerHTML = `
+
+                <img
+                    src="${destination.image}"
+                    class="destination-image"
+                    alt="${destination.name}"
+                >
+
+                <div class="destination-body">
+
+                    <h3>
+                        ${destination.name}
+                    </h3>
+
+                    <p>
+                        📍 ${destination.location}
+                    </p>
+
+                    <div class="destination-price">
+
+                        Starting from
+                        ${formatCurrency(destination.price)}
+
+                    </div>
+
+                    <div
+                        style="
+                            display:flex;
+                            gap:8px;
+                        "
+                    >
+
+                        <button
+                            class="secondary-btn"
+                            onclick='saveDestination(${JSON.stringify(destination)})'
+                        >
+                            ♡ Save
+                        </button>
+
+                        <button
+                            class="primary-btn"
+                            onclick='openPlanModal(${JSON.stringify(destination)})'
+                        >
+                            Plan Trip
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchDestinations() {
+
+    const query =
+        document
+        .getElementById(
+            "destinationSearch"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        destinations.filter(
+            destination =>
+
+                destination.name
+                .toLowerCase()
+                .includes(query)
+
+                ||
+
+                destination.location
+                .toLowerCase()
+                .includes(query)
+        );
+
+
+    displayDestinations(filtered);
+
+}
+
+
+document
+    .getElementById(
+        "destinationSearch"
+    )
+    .addEventListener(
+        "input",
+        searchDestinations
+    );
+
+
+/* =========================================================
+   OPEN PLAN MODAL
+========================================================= */
+
+function openPlanModal(destination) {
+
+    document
+        .getElementById(
+            "selectedDestination"
+        )
+        .value =
+        destination.name;
+
+
+    document
+        .getElementById(
+            "selectedLocation"
+        )
+        .value =
+        destination.location;
+
+
+    document
+        .getElementById(
+            "destinationDisplay"
+        )
+        .value =
+        destination.name;
+
+
+    document
+        .getElementById(
+            "planModal"
+        )
+        .classList
+        .add("show");
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closePlanModal() {
+
+    document
+        .getElementById(
+            "planModal"
+        )
+        .classList
+        .remove("show");
+
+}
+
+
+/* =========================================================
+   DATE CALCULATION
+========================================================= */
+
+function updateDuration() {
+
+    const start =
+        document
+        .getElementById(
+            "startDate"
+        )
+        .value;
+
+
+    const end =
+        document
+        .getElementById(
+            "endDate"
+        )
+        .value;
+
+
+    const duration =
+        document
+        .getElementById(
+            "durationText"
+        );
+
+
+    if (!start || !end) {
+
+        duration.textContent =
+            "Select your dates";
+
+        return;
+
+    }
+
+
+    const days =
+        calculateDays(
+            start,
+            end
+        );
+
+
+    const nights =
+        calculateNights(
+            start,
+            end
+        );
+
+
+    if (days <= 0) {
+
+        duration.textContent =
+            "End date must be after start date.";
+
+        return;
+
+    }
+
+
+    duration.textContent =
+        `${days} Days • ${nights} Nights`;
+
+}
+
+
+document
+    .getElementById("startDate")
+    .addEventListener(
+        "change",
+        updateDuration
+    );
+
+
+document
+    .getElementById("endDate")
+    .addEventListener(
+        "change",
+        updateDuration
+    );
+
+
+/* =========================================================
+   CREATE TRIP
+========================================================= */
+
+document
+    .getElementById(
+        "planTripForm"
+    )
+    .addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const destination =
+                document
+                .getElementById(
+                    "selectedDestination"
+                )
+                .value;
+
+
+            const location =
+                document
+                .getElementById(
+                    "selectedLocation"
+                )
+                .value;
+
+
+            const startDate =
+                document
+                .getElementById(
+                    "startDate"
+                )
+                .value;
+
+
+            const endDate =
+                document
+                .getElementById(
+                    "endDate"
+                )
+                .value;
+
+
+            const travellers =
+                Number(
+                    document
+                    .getElementById(
+                        "travellers"
+                    )
+                    .value
+                );
+
+
+            const budget =
+                Number(
+                    document
+                    .getElementById(
+                        "tripBudget"
+                    )
+                    .value
+                );
+
+
+            const style =
+                document
+                .getElementById(
+                    "tripStyle"
+                )
+                .value;
+
+
+            const days =
+                calculateDays(
+                    startDate,
+                    endDate
+                );
+
+
+            const nights =
+                calculateNights(
+                    startDate,
+                    endDate
+                );
+
+
+            if (days <= 0) {
+
+                alert(
+                    "Please select valid travel dates."
+                );
+
+                return;
+
+            }
+
+
+            const interests =
+                Array.from(
+                    document.querySelectorAll(
+                        ".interest:checked"
+                    )
+                ).map(
+                    checkbox =>
+                        checkbox.value
+                );
+
+
+            const trip = {
+
+                id: Date.now(),
+
+                destination:
+                    destination,
+
+                location:
+                    location,
+
+                startDate:
+                    startDate,
+
+                endDate:
+                    endDate,
+
+                days:
+                    days,
+
+                nights:
+                    nights,
+
+                travellers:
+                    travellers,
+
+                budget:
+                    budget,
+
+                style:
+                    style,
+
+                interests:
+                    interests,
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            addTrip(trip);
+
+
+            alert(
+                `${destination} trip added successfully!`
+            );
+
+
+            closePlanModal();
+
+
+            window.location.href =
+                "my-trips.html";
+
+        }
+    );
+
+
+/* =========================================================
+   INITIAL DISPLAY
+========================================================= */
+
+displayDestinations(
+    destinations
+);
+
+</script>
+
+</body>
+</html>
